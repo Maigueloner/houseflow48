@@ -99,10 +99,11 @@ export default function BudgetCard({ monthString, monthDateDay1, totals, categor
                 onClick={(e) => e.stopPropagation()} 
             >
                 <div className="overflow-hidden">
-                    <div className="flex flex-col gap-4 mt-4">
-                        {categories.map((cat) => (
-                            <BudgetCategoryList key={cat.category_id} category={cat} />
-                        ))}
+                    <div className="mt-4">
+                        <BudgetCategoryList 
+                            categories={categories} 
+                            monthDateDay1={monthDateDay1} 
+                        />
                     </div>
                 </div>
             </div>

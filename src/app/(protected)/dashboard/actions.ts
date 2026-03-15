@@ -928,3 +928,53 @@ export async function setActiveSavingsGoal(goalId: string) {
 
     revalidatePath('/dashboard');
 }
+
+export async function setCategoryBudget(formData: FormData) {
+    const supabase = await getSupabaseServerClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error('Not authenticated');
+
+    const { data: membership } = await supabase
+        .from('household_members')
+        .select('household_id')
+        .eq('user_id', user.id)
+        .maybeSingle();
+
+    if (!membership) throw new Error('No household membership found');
+
+    const category_id = formData.get('category_id') as string;
+    const month = formData.get('month') as string;
+    const budgetRaw = formData.get('budget_eur');
+    
+    // If budget input is empty, delete the budget entry
+    if (budgetRaw === null || budgetRaw === '') {
+        const { error } = await supabase
+            .from('budgets')
+            .delete()
+            .eq('household_id', membership.household_id)
+            .eq('category_id', category_id)
+            .eq('month', month);
+        
+        if (error) throw new Error(error.message);
+    } else {
+        const budget_eur = Number(budgetRaw);
+        if (isNaN(budget_eur) || budget_eur < 0) {
+            throw new Error('Invalid budget amount');
+        }
+
+        const { error } = await supabase
+            .from('budgets')
+            .upsert({
+                household_id: membership.household_id,
+                category_id,
+                month,
+                budget_eur
+            }, {
+                onConflict: 'household_id,category_id,month'
+            });
+
+        if (error) throw new Error(error.message);
+    }
+
+    revalidatePath('/dashboard');
+}

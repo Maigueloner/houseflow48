@@ -5,8 +5,9 @@ export default function manifest(): MetadataRoute.Manifest {
     name: 'HouseFlow48',
     short_name: 'HouseFlow48',
     description: 'Private household finance application',
-    start_url: '/',
+    start_url: '/dashboard',
     display: 'standalone',
+    display_override: ['window-controls-overlay', 'standalone'],
     background_color: '#09090b',
     theme_color: '#09090b',
     icons: [
@@ -19,6 +20,7 @@ export default function manifest(): MetadataRoute.Manifest {
         src: '/icons/icon-512.png',
         sizes: '512x512',
         type: 'image/png',
+        purpose: 'maskable',
       },
     ],
   }

@@ -34,7 +34,7 @@ export default function BudgetCard({ monthString, monthDateDay1, totals, categor
 
     if (!hasBudgets) {
         return (
-            <section className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm flex flex-col items-center justify-center min-h-[140px] text-center gap-6">
+            <section className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm flex flex-col items-center justify-center min-h-[140px] text-center gap-6">
                 <h2 className="text-gray-400 font-bold uppercase tracking-widest text-xs">No budgets defined</h2>
                 <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                     <button 
@@ -79,7 +79,7 @@ export default function BudgetCard({ monthString, monthDateDay1, totals, categor
                     <h2 className="text-sm font-bold text-gray-900 uppercase tracking-widest">Monthly Budget</h2>
                     <div className="text-gray-400 flex items-center gap-2 text-sm">
                         <span className="tabular-nums">
-                            <span className="text-gray-900 font-bold">€{Number(safeTotals.total_spent).toFixed(0)}</span> / €{Number(safeTotals.total_budget).toFixed(0)}
+                            <span className="text-gray-900 font-bold">€{Number(safeTotals.total_spent).toLocaleString(undefined, { maximumFractionDigits: 0 })}</span> / €{Number(safeTotals.total_budget).toLocaleString(undefined, { maximumFractionDigits: 0 })}
                         </span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={`text-gray-400 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}><path d="m6 9 6 6 6-6"/></svg>
                     </div>

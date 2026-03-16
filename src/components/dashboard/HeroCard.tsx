@@ -16,7 +16,7 @@ export default function HeroCard({
 }: HeroCardProps) {
     const isNetPositive = net >= 0;
 
-    let savingsColor = 'text-red-500';
+    let savingsColor = 'text-rose-500';
     if (savingsRate > 20) {
         savingsColor = 'text-green-600';
     } else if (savingsRate >= 10) {
@@ -38,7 +38,7 @@ export default function HeroCard({
                 </div>
                 <div className="flex flex-col text-right">
                     <span className="text-[10px] uppercase tracking-wider text-gray-500 font-bold">Expenses</span>
-                    <span className="text-lg font-bold text-red-500 tabular-nums">
+                    <span className="text-lg font-bold text-rose-500 tabular-nums">
                         €{expenses.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </span>
                 </div>
@@ -46,7 +46,7 @@ export default function HeroCard({
 
             <div className="flex flex-col items-center py-1">
                 <span className="text-[10px] uppercase tracking-wider text-gray-500 font-bold">Net Result</span>
-                <span className={`text-3xl font-black tabular-nums ${isNetPositive ? 'text-green-600' : 'text-red-500'}`}>
+                <span className={`text-3xl font-black tabular-nums ${isNetPositive ? 'text-green-600' : 'text-rose-500'}`}>
                     €{net.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </span>
             </div>

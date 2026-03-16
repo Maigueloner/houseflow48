@@ -112,7 +112,7 @@ export default function RecurringTemplatesCard({ templates, accounts, categories
             </button>
 
             {isExpanded && (
-                <div className="p-4 border-t border-gray-100 bg-gray-50/30">
+                <div className="p-4 border-t border-gray-100">
                     <div className="space-y-4">
                         {templates.length === 0 ? (
                             <div className="py-12 flex flex-col items-center justify-center text-center space-y-3">

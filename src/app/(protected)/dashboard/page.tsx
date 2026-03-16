@@ -78,8 +78,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
             .gte('transaction_date', start_date)
             .lt('transaction_date', end_date)
             .order('transaction_date', { ascending: false })
-            .order('created_at', { ascending: false })
-            .limit(10),
+            .order('created_at', { ascending: false }),
         supabase.from('categories').select('*').eq('household_id', membership.household_id).order('name'),
         supabase.rpc('get_monthly_comparison', {
             p_household_id: membership.household_id,
@@ -224,6 +223,13 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                     />
                 )}
 
+                <BudgetCard
+                    monthString={normalizedMonth}
+                    monthDateDay1={start_date}
+                    totals={budgetTotals}
+                    categories={budgetCategories}
+                />
+
                 <SavingsGoalCard 
                     progress={savingsGoalProgress} 
                     allGoals={allGoals}
@@ -237,18 +243,12 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                 />
 
                 <AnalyticsAccordion>
-                    <BudgetCard
-                        monthString={normalizedMonth}
-                        monthDateDay1={start_date}
-                        totals={budgetTotals}
-                        categories={budgetCategories}
-                    />
+                    <FinancialTrendChart data={trends} />
 
                     {monthlyReport && (
                          <MonthlyReportCard report={monthlyReport} />
                     )}
 
-                    <FinancialTrendChart data={trends} />
                     <CategoryChart categories={breakdown || []} />
                     
                     <RecurringTemplatesCard 
@@ -256,6 +256,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                         accounts={accounts || []} 
                         categories={categories || []} 
                     />
+
                     <AccountsCard accounts={accounts || []} />
                     <CategoriesCard categories={categories || []} />
                 </AnalyticsAccordion>

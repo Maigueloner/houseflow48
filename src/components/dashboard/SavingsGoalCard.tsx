@@ -114,7 +114,7 @@ export default function SavingsGoalCard({ progress, allGoals }: SavingsGoalCardP
     const renderActiveGoal = () => {
         if (!progress || !progress.goal_name) {
             return (
-                <div className="flex flex-col items-center justify-center text-center space-y-2 py-4">
+                <div className="flex flex-col items-center justify-center text-center space-y-2 p-8">
                     <p className="text-gray-400 font-medium text-sm">No active savings goal</p>
                     <div className="w-full bg-gray-100 h-1.5 rounded-full overflow-hidden opacity-30"></div>
                 </div>
@@ -146,7 +146,7 @@ export default function SavingsGoalCard({ progress, allGoals }: SavingsGoalCardP
                                     </button>
                                     <button 
                                         onClick={() => setDeletingGoalId(activeGoalFromList.id)}
-                                        className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                                        className="p-1.5 text-gray-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
                                     >
                                         <Trash2 size={14} />
                                     </button>
@@ -260,7 +260,7 @@ export default function SavingsGoalCard({ progress, allGoals }: SavingsGoalCardP
                                             </button>
                                             <button 
                                                 onClick={() => setDeletingGoalId(goal.id)}
-                                                className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-white rounded-lg transition-colors border border-transparent hover:border-red-100"
+                                                className="p-1.5 text-gray-400 hover:text-rose-600 hover:bg-white rounded-lg transition-colors border border-transparent hover:border-rose-100"
                                             >
                                                 <Trash2 size={14} />
                                             </button>
@@ -411,9 +411,9 @@ export default function SavingsGoalCard({ progress, allGoals }: SavingsGoalCardP
             {deletingGoalId && (
                 <div className="fixed inset-0 bg-gray-900/80 backdrop-blur-md z-[110] flex items-center justify-center p-4">
                     <div className="bg-white border border-gray-200 rounded-[2.5rem] w-full max-w-sm text-center p-8 space-y-6 shadow-2xl relative overflow-hidden animate-in zoom-in-95 duration-200">
-                        <div className="absolute top-0 left-0 w-full h-1.5 bg-red-500/20"></div>
+                         <div className="absolute top-0 left-0 w-full h-1.5 bg-rose-500/20"></div>
                         
-                        <div className="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-2 text-red-500">
+                        <div className="w-20 h-20 bg-rose-50 rounded-full flex items-center justify-center mx-auto mb-2 text-rose-500">
                             <Trash2 size={32} />
                         </div>
 
@@ -421,7 +421,7 @@ export default function SavingsGoalCard({ progress, allGoals }: SavingsGoalCardP
                             <h3 className="text-xl font-black text-gray-900 uppercase tracking-tight">Delete Goal?</h3>
                             <p className="text-sm text-gray-500 font-medium">
                                 Are you sure you want to delete <span className="text-gray-900 font-bold">"{allGoals.find(g => g.id === deletingGoalId)?.name}"</span>?<br/>
-                                <span className="text-red-500 text-[10px] font-bold uppercase tracking-widest mt-2 block">
+                                <span className="text-rose-500 text-[10px] font-bold uppercase tracking-widest mt-2 block">
                                     {allGoals.find(g => g.id === deletingGoalId)?.is_active ? 'Active goals cannot be deleted.' : 'This action cannot be undone.'}
                                 </span>
                             </p>
@@ -438,7 +438,7 @@ export default function SavingsGoalCard({ progress, allGoals }: SavingsGoalCardP
                             <button 
                                 onClick={() => handleDelete(deletingGoalId)}
                                 disabled={isProcessing === deletingGoalId}
-                                className="flex-1 py-3.5 bg-red-600 hover:bg-red-700 text-white rounded-2xl font-black text-xs transition-all flex items-center justify-center gap-2 active:scale-[0.95] disabled:opacity-50 shadow-lg shadow-red-100 uppercase tracking-widest"
+                                className="flex-1 py-3.5 bg-rose-600 hover:bg-rose-700 text-white rounded-2xl font-black text-xs transition-all flex items-center justify-center gap-2 active:scale-[0.95] disabled:opacity-50 shadow-lg shadow-rose-100 uppercase tracking-widest"
                             >
                                 {isProcessing === deletingGoalId ? (
                                     <div className="flex items-center gap-2">

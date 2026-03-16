@@ -1,5 +1,5 @@
-import TransactionRow from './TransactionRow';
 import { List, Search } from 'lucide-react';
+import TransactionListClient from './TransactionListClient';
 
 interface TransactionListProps {
     title?: string;
@@ -27,23 +27,18 @@ export default function TransactionList({ title, transactions, accounts, categor
     }
 
     return (
-        <div className="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm">
+        <div className="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm overflow-hidden">
             {title && (
                 <div className="flex items-center gap-2 mb-4">
                     <List size={16} className="text-gray-400" />
                     <h2 className="text-sm font-semibold text-gray-900">{title}</h2>
                 </div>
             )}
-            <ul className="divide-y divide-gray-100">
-                {transactions.map((t) => (
-                    <TransactionRow
-                        key={t.id}
-                        transaction={t}
-                        accounts={accounts}
-                        categories={categories}
-                    />
-                ))}
-            </ul>
+            <TransactionListClient 
+                transactions={transactions} 
+                accounts={accounts} 
+                categories={categories} 
+            />
         </div>
     );
 }

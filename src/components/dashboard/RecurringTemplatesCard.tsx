@@ -97,7 +97,7 @@ export default function RecurringTemplatesCard({ templates, accounts, categories
         <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
             <button 
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="w-full p-4 flex items-center justify-between hover:bg-gray-50 transition-colors"
+                className="w-full px-4 py-3 flex items-center justify-between hover:bg-gray-50 transition-colors"
             >
                 <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center text-gray-500">
@@ -112,8 +112,8 @@ export default function RecurringTemplatesCard({ templates, accounts, categories
             </button>
 
             {isExpanded && (
-                <div className="p-4 border-t border-gray-100">
-                    <div className="space-y-4">
+                <div className="p-4 border-t border-gray-100 bg-gray-50/30">
+                    <div className="space-y-3 mb-4">
                         {templates.length === 0 ? (
                             <div className="py-12 flex flex-col items-center justify-center text-center space-y-3">
                                 <div className="w-12 h-12 rounded-2xl bg-gray-50 flex items-center justify-center text-gray-300">

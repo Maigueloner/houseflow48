@@ -1,15 +1,15 @@
 'use client';
 
 import { useState } from 'react';
-import { 
-    Wallet, 
-    Edit2, 
-    Trash2, 
-    Plus, 
-    ChevronDown, 
-    ChevronUp, 
-    Check, 
-    X, 
+import {
+    Wallet,
+    Edit2,
+    Trash2,
+    Plus,
+    ChevronDown,
+    ChevronUp,
+    Check,
+    X,
     AlertCircle,
     Loader2
 } from 'lucide-react';
@@ -41,7 +41,7 @@ export default function AccountsCard({ accounts }: AccountsCardProps) {
         e.preventDefault();
         setIsProcessing('create');
         const formData = new FormData(e.currentTarget);
-        
+
         try {
             await createAccount(formData);
             toast.success('Account created');
@@ -60,7 +60,7 @@ export default function AccountsCard({ accounts }: AccountsCardProps) {
         const formData = new FormData();
         formData.append('id', id);
         formData.append('name', editingName.trim());
-        
+
         try {
             await renameAccount(formData);
             toast.success('Account renamed');
@@ -76,7 +76,7 @@ export default function AccountsCard({ accounts }: AccountsCardProps) {
         setIsProcessing(id);
         const formData = new FormData();
         formData.append('id', id);
-        
+
         try {
             await deleteAccount(formData);
             toast.success('Account deleted');
@@ -92,7 +92,7 @@ export default function AccountsCard({ accounts }: AccountsCardProps) {
 
     return (
         <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
-            <button 
+            <button
                 onClick={() => setIsExpanded(!isExpanded)}
                 className="w-full px-4 py-3 flex items-center justify-between hover:bg-gray-50 transition-colors"
             >
@@ -112,14 +112,14 @@ export default function AccountsCard({ accounts }: AccountsCardProps) {
                 <div className="p-4 border-t border-gray-100 bg-gray-50/30">
                     <div className="space-y-2 mb-4">
                         {accounts.map((account) => (
-                            <div 
+                            <div
                                 key={account.id}
                                 className="flex items-center justify-between p-3 bg-white border border-gray-200 rounded-xl group hover:shadow-sm transition-all"
                             >
                                 <div className="flex-1 flex items-center gap-3 pr-2 overflow-hidden">
                                     {editingAccountId === account.id ? (
                                         <div className="flex-1 flex items-center gap-2">
-                                            <input 
+                                            <input
                                                 autoFocus
                                                 value={editingName}
                                                 onChange={(e) => setEditingName(e.target.value)}
@@ -129,7 +129,7 @@ export default function AccountsCard({ accounts }: AccountsCardProps) {
                                                     if (e.key === 'Escape') setEditingAccountId(null);
                                                 }}
                                             />
-                                            <button 
+                                            <button
                                                 onClick={() => handleRename(account.id)}
                                                 disabled={isProcessing === account.id}
                                                 className="p-1.5 text-green-600 hover:bg-green-50 rounded-lg disabled:opacity-50"
@@ -141,7 +141,7 @@ export default function AccountsCard({ accounts }: AccountsCardProps) {
                                                     </div>
                                                 ) : <Check size={16} />}
                                             </button>
-                                            <button 
+                                            <button
                                                 onClick={() => setEditingAccountId(null)}
                                                 className="p-1.5 text-gray-400 hover:bg-gray-100 rounded-lg"
                                             >
@@ -158,7 +158,7 @@ export default function AccountsCard({ accounts }: AccountsCardProps) {
 
                                 {editingAccountId !== account.id && (
                                     <div className="flex items-center gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
-                                        <button 
+                                        <button
                                             onClick={() => {
                                                 setEditingAccountId(account.id);
                                                 setEditingName(account.name);
@@ -168,7 +168,7 @@ export default function AccountsCard({ accounts }: AccountsCardProps) {
                                         >
                                             <Edit2 size={14} />
                                         </button>
-                                        <button 
+                                        <button
                                             onClick={() => setDeletingAccountId(account.id)}
                                             className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg"
                                             title="Delete"
@@ -181,7 +181,7 @@ export default function AccountsCard({ accounts }: AccountsCardProps) {
                         ))}
                     </div>
 
-                    <button 
+                    <button
                         onClick={() => setIsAddOpen(true)}
                         className="w-full py-3 flex items-center justify-center gap-2 border-2 border-dashed border-gray-200 rounded-xl text-gray-400 hover:border-indigo-200 hover:text-indigo-600 hover:bg-indigo-50/30 transition-all font-bold text-xs uppercase tracking-widest"
                     >
@@ -191,8 +191,8 @@ export default function AccountsCard({ accounts }: AccountsCardProps) {
                 </div>
             )}
 
-            <BottomSheet 
-                isOpen={isAddOpen} 
+            <BottomSheet
+                isOpen={isAddOpen}
                 onClose={() => {
                     setIsAddOpen(false);
                 }}
@@ -202,7 +202,7 @@ export default function AccountsCard({ accounts }: AccountsCardProps) {
                     <div className="space-y-4">
                         <div className="space-y-2">
                             <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest pl-1">Account name</label>
-                            <input 
+                            <input
                                 name="name"
                                 required
                                 placeholder="Bank name, wallet, etc."
@@ -215,10 +215,10 @@ export default function AccountsCard({ accounts }: AccountsCardProps) {
                             <div className="grid grid-cols-2 gap-3">
                                 {['EUR', 'THB'].map((code) => (
                                     <label key={code} className="cursor-pointer">
-                                        <input 
-                                            type="radio" 
-                                            name="currency_code" 
-                                            value={code} 
+                                        <input
+                                            type="radio"
+                                            name="currency_code"
+                                            value={code}
                                             defaultChecked={code === 'EUR'}
                                             className="peer sr-only"
                                         />
@@ -232,7 +232,7 @@ export default function AccountsCard({ accounts }: AccountsCardProps) {
 
                         <div className="space-y-2">
                             <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest pl-1">Initial balance (optional)</label>
-                            <input 
+                            <input
                                 name="initial_balance"
                                 type="number"
                                 step="0.01"
@@ -244,7 +244,7 @@ export default function AccountsCard({ accounts }: AccountsCardProps) {
                     </div>
 
 
-                    <button 
+                    <button
                         type="submit"
                         disabled={isProcessing === 'create'}
                         className="w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl font-black text-sm transition-all flex items-center justify-center gap-2 active:scale-[0.98] disabled:opacity-50 shadow-lg shadow-indigo-200 uppercase tracking-widest"
@@ -269,11 +269,11 @@ export default function AccountsCard({ accounts }: AccountsCardProps) {
                 <div className="fixed inset-0 bg-gray-900/80 backdrop-blur-md z-[110] flex items-center justify-center p-4">
                     <div className="bg-white border border-gray-200 rounded-3xl w-full max-w-sm text-center p-8 space-y-6 shadow-2xl relative overflow-hidden">
                         <div className="absolute top-0 left-0 w-full h-1.5 bg-red-500/20"></div>
-                        
+
                         <div className="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-2">
                             <Trash2 size={32} className="text-red-500" />
                         </div>
-                        
+
                         <div className="space-y-2">
                             <h3 className="text-xl font-black text-gray-900 uppercase tracking-tight">Delete Account?</h3>
                             <p className="text-sm text-gray-500 font-medium">
@@ -282,9 +282,9 @@ export default function AccountsCard({ accounts }: AccountsCardProps) {
                             </p>
                         </div>
 
-                        
+
                         <div className="flex gap-3 pt-2">
-                            <button 
+                            <button
                                 onClick={() => {
                                     setDeletingAccountId(null);
                                 }}
@@ -292,7 +292,7 @@ export default function AccountsCard({ accounts }: AccountsCardProps) {
                             >
                                 Cancel
                             </button>
-                            <button 
+                            <button
                                 onClick={() => handleDelete(deletingAccountId)}
                                 disabled={isProcessing === deletingAccountId}
                                 className="flex-1 py-3 bg-red-600 hover:bg-red-700 text-white rounded-2xl font-black text-sm transition-all flex items-center justify-center gap-2 active:scale-[0.98] disabled:opacity-50 shadow-lg shadow-red-200 uppercase tracking-widest"

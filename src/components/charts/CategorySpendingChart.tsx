@@ -72,7 +72,7 @@ export default function CategorySpendingChart({ breakdown, totalExpenses }: Cate
                     
                     {/* Center Label */}
                     <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                        <span className="text-xl font-black text-gray-900 tabular-nums">€{Number(totalExpenses).toLocaleString()}</span>
+                        <span className="text-xl font-black text-gray-900 tabular-nums">€{new Intl.NumberFormat(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(Math.trunc(totalExpenses * 100) / 100)}</span>
                         <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">Total</span>
                     </div>
                 </div>

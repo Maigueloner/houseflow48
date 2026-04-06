@@ -240,6 +240,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                     transactions={transactions || []} 
                     accounts={accounts || []} 
                     categories={categories || []} 
+                    month={normalizedMonth}
                 />
 
                 <AnalyticsAccordion>

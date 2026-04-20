@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { updateTransaction, deleteTransaction } from '@/app/(protected)/dashboard/actions';
-import { TrendingUp, TrendingDown } from 'lucide-react';
+import { TrendingUp, TrendingDown, Pencil, Trash2 } from 'lucide-react';
 import { getCurrencySymbol } from '@/utils/currency';
 import { getCategoryIcon } from '@/utils/categoryIcon';
 
@@ -179,20 +179,24 @@ export default function TransactionRow({ transaction, accounts, categories }: Tr
                 </div>
             </div>
             
-            <div className="flex gap-2 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-150">
+            <div className="flex gap-2 justify-end pr-[2px] actions-enter">
                 <button 
                     onClick={() => setIsEditing(true)} 
                     disabled={isPending} 
-                    className="h-7 bg-white hover:bg-gray-50 text-gray-600 border border-gray-200 rounded px-3 text-[10px] font-bold transition-all active:scale-[0.96] disabled:opacity-50 duration-100"
+                    className="h-7 w-7 p-0 inline-flex items-center justify-center bg-white hover:bg-gray-50 text-gray-600 border border-gray-200 rounded-lg transition-all active:scale-[0.94] disabled:opacity-50 duration-100"
+                    title="Edit"
+                    aria-label="Edit"
                 >
-                    Edit
+                    <Pencil size={13} />
                 </button>
                 <button 
                     onClick={handleDelete} 
                     disabled={isPending} 
-                    className="h-7 bg-red-50 hover:bg-red-100 text-red-600 border border-red-100 rounded px-3 text-[10px] font-bold transition-all active:scale-[0.96] disabled:opacity-50 duration-100"
+                    className="h-7 w-7 p-0 inline-flex items-center justify-center bg-red-50 hover:bg-red-100 text-red-600 border border-red-100 rounded-lg transition-all active:scale-[0.94] disabled:opacity-50 duration-100"
+                    title="Delete"
+                    aria-label="Delete"
                 >
-                    Delete
+                    <Trash2 size={13} />
                 </button>
             </div>
         </li>

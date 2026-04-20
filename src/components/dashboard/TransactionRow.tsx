@@ -179,7 +179,7 @@ export default function TransactionRow({ transaction, accounts, categories }: Tr
                 </div>
             </div>
             
-            <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
+            <div className="flex gap-2 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-150">
                 <button 
                     onClick={() => setIsEditing(true)} 
                     disabled={isPending} 

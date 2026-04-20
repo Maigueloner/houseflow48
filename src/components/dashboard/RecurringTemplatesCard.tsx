@@ -113,7 +113,7 @@ export default function RecurringTemplatesCard({ templates, accounts, categories
 
             {isExpanded && (
                 <div className="p-4 border-t border-gray-100 bg-gray-50/30">
-                    <div className="space-y-3 mb-4">
+                    <div className="space-y-3">
                         {templates.length === 0 ? (
                             <div className="py-12 flex flex-col items-center justify-center text-center space-y-3">
                                 <div className="w-12 h-12 rounded-2xl bg-gray-50 flex items-center justify-center text-gray-300">
@@ -136,8 +136,8 @@ export default function RecurringTemplatesCard({ templates, accounts, categories
                                         : 'bg-gray-50 border-gray-100 opacity-60'
                                     }`}
                                 >
-                                    <div className="flex justify-between items-start">
-                                        <div className="flex-1">
+                                    <div className="flex justify-between items-start gap-2">
+                                        <div className="flex-1 min-w-0">
                                             <div className="flex items-center gap-2 mb-1.5">
                                                 <span className="text-[9px] font-black px-1.5 py-0.5 rounded bg-gray-100 text-gray-500 uppercase tracking-widest">
                                                     {template.frequency}
@@ -147,7 +147,7 @@ export default function RecurringTemplatesCard({ templates, accounts, categories
                                                         Paused
                                                     </span>
                                                 )}
-                                                <h4 className="font-bold text-gray-900 text-sm">{template.name}</h4>
+                                                <h4 className="font-bold text-gray-900 text-sm truncate">{template.name}</h4>
                                             </div>
                                             <div className="flex items-center gap-3 text-[10px] text-gray-500 font-medium">
                                                 <span className="flex items-center gap-1">
@@ -162,13 +162,13 @@ export default function RecurringTemplatesCard({ templates, accounts, categories
                                             </div>
                                         </div>
                                         
-                                        <div className="text-right ml-4">
-                                            <p className="text-base font-black text-gray-900 tabular-nums leading-none">
+                                        <div className="flex flex-col items-end gap-1 ml-3 shrink-0">
+                                            <p className="text-base font-black text-gray-900 tabular-nums leading-none whitespace-nowrap">
                                                 {template.amount_original.toLocaleString(undefined, { minimumFractionDigits: 2 })}
                                             </p>
-                                            <p className="text-[9px] text-gray-400 font-bold uppercase tracking-widest mt-1">{template.currency_code}</p>
+                                            <p className="text-[9px] text-gray-400 font-bold uppercase tracking-widest">{template.currency_code}</p>
                                             
-                                            <div className="flex items-center justify-end gap-1 mt-3">
+                                            <div className="flex items-center justify-end gap-1">
                                                 <button 
                                                     onClick={() => handleToggle(template.id)}
                                                     disabled={isProcessing === template.id}

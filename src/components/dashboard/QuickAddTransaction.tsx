@@ -7,6 +7,7 @@ import { Check, Plus, X } from 'lucide-react';
 import { getCurrencySymbol } from '@/utils/currency';
 import { getCategoryIcon } from '@/utils/categoryIcon';
 import { toast } from 'sonner';
+import { useIncomeConfetti } from '@/hooks/useIncomeConfetti';
 
 export interface Account {
     id: string;
@@ -21,6 +22,7 @@ interface QuickAddTransactionProps {
 }
 
 export default function QuickAddTransaction({ accounts, categories, start_date }: QuickAddTransactionProps) {
+    const { fireConfetti } = useIncomeConfetti();
     const [isPending, setIsPending] = useState(false);
     const amountInputRef = useRef<HTMLInputElement>(null);
 
@@ -87,10 +89,15 @@ export default function QuickAddTransaction({ accounts, categories, start_date }
 
     async function handleSubmit(formData: FormData) {
         setIsPending(true);
+        const transactionType = formData.get('type') as string;
 
         try {
             await createTransaction(formData);
             toast.success('Transaction added');
+
+            if (transactionType === 'income') {
+                fireConfetti();
+            }
 
             // Save preferences
             localStorage.setItem('lastAccountId', formData.get('account_id') as string);

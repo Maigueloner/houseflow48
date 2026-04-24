@@ -978,3 +978,37 @@ export async function setCategoryBudget(formData: FormData) {
 
     revalidatePath('/dashboard');
 }
+
+export async function getCategoryTransactions(
+    category_id: string | null,
+    start_date: string,
+    end_date: string
+) {
+    if (!category_id) return [];
+
+    const supabase = await getSupabaseServerClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error('Not authenticated');
+
+    const { data: membership } = await supabase
+        .from('household_members')
+        .select('household_id')
+        .eq('user_id', user.id)
+        .maybeSingle();
+
+    if (!membership) throw new Error('No household membership found');
+
+    const { data, error } = await supabase
+        .from('transactions')
+        .select('*')
+        .eq('household_id', membership.household_id)
+        .eq('category_id', category_id)
+        .gte('transaction_date', start_date)
+        .lt('transaction_date', end_date)
+        .order('transaction_date', { ascending: false })
+        .order('created_at', { ascending: false });
+
+    if (error) throw new Error(error.message);
+
+    return data || [];
+}

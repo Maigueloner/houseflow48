@@ -220,6 +220,10 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                     <CategorySpendingChart 
                         breakdown={monthlyReport.category_breakdown} 
                         totalExpenses={monthlyReport.expenses} 
+                        accounts={accounts || []}
+                        categories={categories || []}
+                        start_date={start_date}
+                        end_date={end_date}
                     />
                 )}
 
